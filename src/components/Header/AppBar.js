@@ -5,9 +5,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SearchBar from "./SearchBar";
-import LoginButton from "./LoginButton";
 import AppBarItem from "./AppBarItem";
 import { useNavigate } from "react-router-dom";
+import Icon from "./Icon";
 // Dark mode theme
 const darkTheme = createTheme({
   palette: {
@@ -22,7 +22,7 @@ export default function ButtonAppBar() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            {/* Icon name */}
+            {/* Name */}
             <Typography
               variant="h6"
               component="div"
@@ -38,9 +38,8 @@ export default function ButtonAppBar() {
             {/* Search Bar */}
             <SearchBar />
 
-            {/* Login Button */}
-
-            <LoginButton />
+            {/* Cart , Wishlist , User  */}
+            <Icon />
           </Toolbar>
         </AppBar>
       </Box>
