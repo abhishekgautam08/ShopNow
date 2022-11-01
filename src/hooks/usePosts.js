@@ -15,7 +15,7 @@ const usePosts = () => {
     getProducts();
   }, []);
   console.log(URL);
-  return [loading, posts];
+  return { loading, posts };
 };
 
 export default usePosts;

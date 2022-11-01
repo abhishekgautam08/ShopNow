@@ -1,54 +1,33 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Box, Stack } from "@mui/material";
-import ProductsCards from "../components/ProductsCards/ProductsCards";
-import Footer from "../components/Footer/Footer";
-import Spinner from "../components/Spinner/Spinner";
-import SideBar from "../components/SideBar/SideBar";
+import React from "react";
+import Carousel from "react-material-ui-carousel";
+import usePosts from "../hooks/usePosts";
+import "./Home.css";
+import { Paper } from "@mui/material";
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);
-      const URL = await axios.get`https://fakestoreapi.com/products`;
-
-      setPosts(URL.data);
-      setLoading(true);
-    };
-    getProducts();
-  }, []);
-  console.log(URL);
+  const { posts } = usePosts();
   return (
     <>
-      {/* {loading && <Spinner />} */}
-      <Box>
-        <Stack
-          // direction="row"
-          // justifyContent="space-evenly"
-          // alignItems="flex-start"
-          spacing={0.5}
-        >
-          {/* <SideBar /> */}
-          <div className="card-container">
-            {posts.map((product) => (
-              <ProductsCards
-                product={product}
-                image={product.image}
-                title={product.title}
-                price={product.price}
-                description={product.description}
-                rating={product.rating.rate}
-              />
-            ))}
-          </div>
-
-          {/* <Footer /> */}
-        </Stack>
-      </Box>
+      <Carousel>
+        {posts.map((item, i) => (
+          <Item key={i} item={item} />
+        ))}
+      </Carousel>
     </>
   );
 };
 
+function Item({ item }) {
+  return (
+    <Paper>
+      <img
+        src={item.image}
+        alt={item.title}
+        object-fit=" cover"
+        style={{ width: "40%", height: "45vh" }}
+        className="center"
+      />
+    </Paper>
+  );
+}
 export default Home;
