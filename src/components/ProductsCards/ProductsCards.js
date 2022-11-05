@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ADD_TO_CART } from "../../store/cartSlice";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import { styled } from "@mui/material/styles";
@@ -24,8 +24,18 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 const ProductsCards = (props) => {
-  let { product, image, title, price, description, rating } = props;
+  const { product } = props;
+  const {
+    id,
+    image,
+    title,
+    price,
+    description,
+    rating: { rate: rating },
+  } = product;
+
   const [open, setOpen] = useState(false);
+  const { items: cartItems } = useSelector((state) => state.cart);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -86,6 +96,11 @@ const ProductsCards = (props) => {
           <Button
             variant="contained"
             size="small"
+            style={{
+              display: cartItems.some((item) => item.id === id)
+                ? "none"
+                : "block",
+            }}
             onClick={() => handleAdd(product)}
           >
             Add To Cart

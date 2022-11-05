@@ -17,16 +17,7 @@ const Products = () => {
         }}
       >
         {posts.map((product) => (
-          <ProductsCards
-            key={product.id}
-            product={product}
-            image={product.image}
-            title={product.title}
-            price={product.price}
-            description={product.description}
-            rating={product.rating.rate}
-            loading={loading}
-          />
+          <ProductsCards key={product.id} product={product} loading={loading} />
         ))}
       </div>
       {/* ProductsCards Components */}

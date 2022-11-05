@@ -8,7 +8,7 @@ const initialState = {
 const calculateTotals = (state) => {
   let total = 0;
   state.items.forEach((item) => {
-    total = total + item.price;
+    total = total + item.count * item.price;
   });
   state.total = total;
 };
@@ -20,7 +20,14 @@ const cartSlice = createSlice({
   reducers: {
     ADD_TO_CART(state, action) {
       const items = state.items;
-      state.items = items.concat({ ...action.payload });
+      const existingItem = items.find((item) => item.id === action.payload.id);
+
+      if (existingItem) {
+        existingItem.count += 1;
+      } else {
+        action.payload.count = 1;
+        state.items = items.concat({ ...action.payload });
+      }
 
       calculateTotals(state);
     },
@@ -29,12 +36,32 @@ const cartSlice = createSlice({
       state.items = state.items.filter((item) => item.id !== action.payload);
       calculateTotals(state);
     },
-    //   ADD_QUANTITY(state, action) {},
+    ADD_QUANTITY(state, action) {
+      const items = state.items;
+      const existingItem = items.find((item) => item.id === action.payload);
+      if (existingItem) {
+        existingItem.count += 1;
+      }
+      calculateTotals(state);
+    },
 
-    // SUB_QUANTITY(state, action) {},
+    SUB_QUANTITY(state, action) {
+      const items = state.items;
+      const existingItem = items.find((item) => item.id === action.payload);
+      if (existingItem) {
+        existingItem.count -= 1;
+      }
+
+      if (existingItem.count <= 0) {
+        state.items = state.items.filter((item) => item.id !== action.payload);
+      }
+
+      calculateTotals(state);
+    },
   },
 });
 
-export const { ADD_TO_CART, REMOVE_TO_CART } = cartSlice.actions;
+export const { ADD_TO_CART, REMOVE_TO_CART, ADD_QUANTITY, SUB_QUANTITY } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

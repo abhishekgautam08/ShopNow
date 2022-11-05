@@ -15,11 +15,18 @@ import Grid from "@mui/material/Grid";
 import CardActions from "@mui/material/CardActions";
 import Divider from "@mui/material/Divider";
 import { useSelector, useDispatch } from "react-redux/es/exports";
-import { REMOVE_TO_CART } from "../../store/cartSlice";
+import {
+  ADD_QUANTITY,
+  REMOVE_TO_CART,
+  SUB_QUANTITY,
+} from "../../store/cartSlice";
 
 const AddToCart = () => {
+  const dispatch = useDispatch();
+  const { items, total } = useSelector((state) => state.cart);
+
   const [anchorEl, setAnchorEl] = useState(null);
-  const [counter, setCounter] = useState(1);
+  // const [counter, setCounter] = useState(1);
 
   const open = Boolean(anchorEl);
 
@@ -30,19 +37,17 @@ const AddToCart = () => {
     setAnchorEl(event.currentTarget);
   };
   //increase counter
-  const increase = () => {
-    setCounter((count) => count + 1);
+  const increase = (productId) => {
+    dispatch(ADD_QUANTITY(productId));
+    // setCounter((count) => count + 1);
   };
 
   //decrease counter
-  const decrease = () => {
-    setCounter((count) => count - 1);
+  const decrease = (productId) => {
+    dispatch(SUB_QUANTITY(productId));
+    // setCounter((count) => count - 1);
   };
 
-  // State
-
-  const dispatch = useDispatch();
-  const { items, total } = useSelector((state) => state.cart);
   const getDatas = items;
   const handleRemove = (productId) => {
     dispatch(REMOVE_TO_CART(productId));
@@ -52,7 +57,10 @@ const AddToCart = () => {
   return (
     <>
       <Badge
-        badgeContent={getDatas.length}
+        badgeContent={getDatas.reduce((acc, item) => {
+          acc += item.count;
+          return acc;
+        }, 0)}
         id="basic-button"
         onClick={handleClickOpen}
         color="primary"
@@ -120,9 +128,9 @@ const AddToCart = () => {
                           {(product.price * 70).toFixed(2)} ₹
                         </Typography>
                         <br />
-                        <button onClick={decrease}>-</button>
-                        <span s>{counter}</span>
-                        <button onClick={increase}>+</button>
+                        <button onClick={() => decrease(product.id)}>-</button>
+                        <span>{product.count}</span>
+                        <button onClick={() => increase(product.id)}>+</button>
                         <Divider />
                         <Button onClick={() => handleRemove(product.id)}>
                           Remove
@@ -142,7 +150,11 @@ const AddToCart = () => {
               >
                 <CardContent>
                   <Typography variant="h5">
-                    Quantity - {getDatas.length}
+                    Quantity -
+                    {getDatas.reduce((acc, item) => {
+                      acc += item.count;
+                      return acc;
+                    }, 0)}
                   </Typography>
                   <Divider />
                   <br />
