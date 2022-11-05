@@ -20,13 +20,7 @@ const Home = () => {
 function Item({ item }) {
   return (
     <Paper>
-      <img
-        src={item.image}
-        alt={item.title}
-        object-fit=" cover"
-        style={{ width: "40%", height: "45vh" }}
-        className="center"
-      />
+      <img src={item.image} alt={item.title} className="center" />
     </Paper>
   );
 }
