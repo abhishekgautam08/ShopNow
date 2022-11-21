@@ -14,6 +14,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import CardActions from "@mui/material/CardActions";
 import Divider from "@mui/material/Divider";
+
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import {
   ADD_QUANTITY,
@@ -117,20 +118,29 @@ const AddToCart = () => {
                         />
                         <br />
                         <br />
-
                         <Typography>
-                          <b>ITEM NAME-</b>
+                          <b>Product Name-</b>
+                          &nbsp; &nbsp;
                           {product.title}
                         </Typography>
                         <br />
                         <Typography>
-                          <b>PRICE-</b>
+                          <b>Price-</b>
+                          &nbsp; &nbsp;
                           {(product.price * 70).toFixed(2)} ₹
                         </Typography>
                         <br />
-                        <button onClick={() => decrease(product.id)}>-</button>
+                        <IconButton onClick={() => decrease(product.id)}>
+                          -
+                        </IconButton>
+                        &nbsp; &nbsp;
                         <span>{product.count}</span>
-                        <button onClick={() => increase(product.id)}>+</button>
+                        &nbsp; &nbsp;
+                        <IconButton onClick={() => increase(product.id)}>
+                          +
+                        </IconButton>
+                        <br />
+                        <br />
                         <Divider />
                         <Button onClick={() => handleRemove(product.id)}>
                           Remove
@@ -150,7 +160,8 @@ const AddToCart = () => {
               >
                 <CardContent>
                   <Typography variant="h5">
-                    Quantity -
+                    <b> Quantity - </b>
+                    &nbsp; &nbsp;
                     {getDatas.reduce((acc, item) => {
                       acc += item.count;
                       return acc;
@@ -159,7 +170,7 @@ const AddToCart = () => {
                   <Divider />
                   <br />
                   <Typography color="text.secondary" variant="h3">
-                    Total - {(total * 70).toFixed(2)} ₹
+                    <b> Total - </b> {(total * 70).toFixed(2)} ₹
                   </Typography>
                   <Divider />
                   <CardActions>

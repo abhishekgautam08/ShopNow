@@ -10,7 +10,7 @@ const usePosts = () => {
       const URL = await axios.get`https://fakestoreapi.com/products`;
 
       setPosts(URL.data);
-      setLoading(true);
+      setLoading(false);
     };
     getProducts();
   }, []);

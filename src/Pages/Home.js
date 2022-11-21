@@ -7,20 +7,34 @@ import { Paper } from "@mui/material";
 const Home = () => {
   const { posts } = usePosts();
   return (
-    <>
-      <Carousel>
+    <div
+      style={{
+        flex: 1,
+      }}
+    >
+      <Carousel
+        style={{
+          flex: 1,
+        }}
+      >
         {posts.map((item, i) => (
           <Item key={i} item={item} />
         ))}
       </Carousel>
-    </>
+    </div>
   );
 };
 
 function Item({ item }) {
   return (
     <Paper>
-      <img src={item.image} alt={item.title} className="center" />
+      <div
+        style={{
+          objectFit: "cover",
+        }}
+      >
+        <img src={item.image} alt={item.title} className="center" />
+      </div>
     </Paper>
   );
 }

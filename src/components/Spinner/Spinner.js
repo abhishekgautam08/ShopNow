@@ -4,7 +4,7 @@ import "./Spinner.css";
 const Spinner = () => {
   return (
     <>
-      <img className="center" src={Load} alt="loading" />
+      <img className="spinner-center" src={Load} alt="loading" />
     </>
   );
 };

@@ -41,6 +41,7 @@ const Navbar = () => {
             href="/"
             sx={{
               mr: 2,
+              ml: 3,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,

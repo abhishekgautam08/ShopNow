@@ -4,11 +4,24 @@ import Spinner from "../components/Spinner/Spinner";
 
 const Products = () => {
   const { posts, loading } = usePosts();
+
+  console.info({ loading });
   return (
     <>
-      {/* {loading && <Spinner />} */}
+      {loading && (
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Spinner />
+        </div>
+      )}
 
-      {/* ProductsCards Components */}
       <div
         style={{
           display: "flex",
@@ -20,7 +33,6 @@ const Products = () => {
           <ProductsCards key={product.id} product={product} loading={loading} />
         ))}
       </div>
-      {/* ProductsCards Components */}
     </>
   );
 };

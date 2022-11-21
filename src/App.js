@@ -10,14 +10,38 @@ function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/Home" element={<Home />} />
-        <Route exact path="/Products" element={<ProductsPage />} />
-        <Route exact path="/about" element={<AboutPage />} />
-        <Route exact path="/contact" element={<ContactPage />} />
-      </Routes>
-      <Footer />
+      <div
+        className="main-container"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            overflowY: "auto",
+          }}
+        >
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/Home" element={<Home />} />
+            <Route exact path="/Products" element={<ProductsPage />} />
+            <Route exact path="/about" element={<AboutPage />} />
+            <Route exact path="/contact" element={<ContactPage />} />
+          </Routes>
+        </div>
+        <div
+          style={{
+            height: 150,
+          }}
+        >
+          <Footer />
+        </div>
+      </div>
     </>
   );
 }
