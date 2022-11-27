@@ -5,7 +5,7 @@ import Spinner from "../components/Spinner/Spinner";
 const Products = () => {
   const { posts, loading } = usePosts();
 
-  console.info({ loading });
+  console.info({ posts });
   return (
     <>
       {loading && (
@@ -26,10 +26,11 @@ const Products = () => {
         style={{
           display: "flex",
           flexWrap: "wrap",
-          justifycontent: "space-between",
+          justifyContent: "space-around",
+          height: "100%",
         }}
       >
-        {posts.map((product) => (
+        {posts.map((product, index, posts) => (
           <ProductsCards key={product.id} product={product} loading={loading} />
         ))}
       </div>
