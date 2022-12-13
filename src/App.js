@@ -28,6 +28,7 @@ function App() {
                 flex: 1,
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
                 overflowY: "auto",
               }}
             >
@@ -41,7 +42,7 @@ function App() {
             </div>
             <div
               style={{
-                height: 150,
+                height: 194,
               }}
             >
               <Footer />

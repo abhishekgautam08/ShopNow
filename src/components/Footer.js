@@ -17,9 +17,8 @@ const Footer = () => {
     <Box
       sx={{
         backgroundColor: "#272727",
-        p: 3,
+        p: 2,
         color: "white",
-        // height: 100,
       }}
     >
       <Grid container spacing={2} justifyContent="center">
